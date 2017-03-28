@@ -3,3 +3,6 @@ nvm use 7.7.4
 nvm alias default v7.7.4
 
 npm install -g npm
+
+
+git push -f origin master
