@@ -1,11 +1,12 @@
 var result = Array(Array(9),Array(9),Array(9),Array(9),Array(9),Array(9),Array(9),Array(9),Array(9));
 result[0][4] = 1
 
-
-
 function randomNumber() {
     return Math.floor(Math.random() * 9) + 1;
 }
+
+
+
 
 function numberCheck(inputNum, arrayNum, location) {
     
@@ -36,6 +37,22 @@ function horizontalBeginNumberInit(num) {
             return 6;
     } 
 }
+function verticalBeginNumberInit(num) {
+    switch (num) {
+        case 0:
+        case 3:
+        case 6:
+            return 0;
+        case 1:
+        case 4:
+        case 7:
+            return 1;
+        case 2:
+        case 5:
+        case 8:
+            return 2;
+    }
+}
 //입력한 값에서 가로열에서 중복된 값이 있는 지 검사
 function horizontalDuplicateValueCheck(inputNum, arrayNum, location) {
     var arrayBegin = horizontalBeginNumberInit(arrayNum);
@@ -54,8 +71,26 @@ function horizontalDuplicateValueCheck(inputNum, arrayNum, location) {
     return true;
 }
 
-console.log(arrayDuplicateValueCheck(1, 0));
+function verticalDuplicateValueCheck(inputNum, arrayNum, location) {
+    var arrayBegin = verticalBeginNumberInit(arrayNum);
+    var begin = verticalBeginNumberInit(location);
+    
+    for (; arrayBegin < 9; arrayBegin += 3) {
+        if (arrayBegin == arrayNum) {
+            continue;
+        }
+        for (; begin < 9; begin += 3) {
+            if (result[arrayBegin][begin] == inputNum) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
-console.log(horizontalDuplicateValueCheck(1, 3, 4))
+
+console.log(arrayDuplicateValueCheck(1, 0));
+console.log(horizontalDuplicateValueCheck(1, 2, 4))
+console.log(verticalDuplicateValueCheck(1, 5, 7))
 
 console.log(result)
